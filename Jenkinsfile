@@ -11,10 +11,10 @@ node {
 		git 'https://github.com/gustavoapolinario/node-todo-frontend'
 	}
 	stage('Build') {
-		sh 'npm install'
+		bat 'npm install'
 	}
 	stage('Test') {
-		sh 'npm test'
+		bat 'npm test'
 	}
 	stage('Building image') {
         docker.withRegistry( 'https://' + registry, registryCredential ) {
@@ -29,8 +29,8 @@ node {
         }
 	}
     stage('Removing image') {
-        sh "docker rmi $registry:$BUILD_NUMBER"
-        sh "docker rmi $registry:latest"
+        bat "docker rmi $registry:$BUILD_NUMBER"
+        bat "docker rmi $registry:latest"
     }
     
 }
